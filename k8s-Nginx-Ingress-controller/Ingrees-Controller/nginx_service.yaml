@@ -1,0 +1,23 @@
+#We  need a service to expose the ingress controller to the external world. So we 
+#create a service of type NodePort with the nginx-ingress label selector to link the 
+#service to the deployment. So with these three objects we should be ready with an 
+#ingress controller .
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-ingress
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+    - port: 443
+      targetPort: 443
+      protocol: TCP
+      name: https
+    selector:
+      name: nginx-ingress
+

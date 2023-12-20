@@ -1,0 +1,20 @@
+# Ingress defination file for host based routing 
+
+apiVersiona: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-wear-watch
+spec:
+  rules:
+    - host: "wear.my-online-store.com" 
+      http:
+        paths:
+          - backend:
+            servicename: wear-service
+            servicePort: 80
+    - host: "watch.my-online-store.com"
+      http:
+        paths:
+          - backend:
+            servicename: watch-service
+            serviceport: 80

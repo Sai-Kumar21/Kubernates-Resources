@@ -1,0 +1,6 @@
+# servieaccount for Ingrees-controller with "Roles" "ClusterRoles" and "RoleBindings" 
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nginx-ingress-sa

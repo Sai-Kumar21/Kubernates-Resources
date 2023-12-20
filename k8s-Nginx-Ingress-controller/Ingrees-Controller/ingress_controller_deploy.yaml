@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment     #object which we're creating
+metadata:
+  name: nginx-ingress-controller  #name of the object
+spec:		
+  replicas: 1  #number of replicas
+  selector:
+    matchLabels:
+      name: nginx-ingress  #labels of the pods
+  template:    #under the template we can specific pod configurations
+    metadata:
+      labels: 
+      name: nginx-ingress
+    spec:
+      containers:
+	      - name: nginx-ingress-controller
+	        image: quay.io/kubernetes-ingresscontroller/nginx-ingress-controller:0.21.0
+      args:
+        - /nginx-ingress-controller  # command to start the service inside a pod
+        - --configmap=$(POD_NAMESPACE)/nginx-configuration  ##configmap name
+# we must pass 2 enviromental variables that carries pod name and namespace too nginx service required these two for read the configuration data from with in pod
+      env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+            fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+          fieldRef:
+          fieldPath: metadata.namespac 
+# specified the ports used by ingress-controller to connect from outside world these ports info we should have inside a service defination file 
+      ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+

@@ -1,0 +1,19 @@
+# Ingress resource defination file for Path based routing 
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-wear-watch
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /wear # example path
+            backend:
+            serviceName: wear-service # service name to send traffic
+            servicePort: 80 # port using by service
+          - path: /watch  # example path
+            backend:
+            serviceName: watch-service # service name to send traffic
+            servicePort: 80 # port useing by service
+
