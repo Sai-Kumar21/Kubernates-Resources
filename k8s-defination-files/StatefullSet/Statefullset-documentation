@@ -1,0 +1,23 @@
+--------------
+StatefulSet:
+--------------
+# statefulset will be work like a deployment, it can create replicaset, pods , rolling updates, rollback 
+
+# statefulset will spinup the pods in sequential order ex: 1st it's bring one pod if that pod fully functional,then it's spinup other pod in order like. this is graceful deployment and scaling
+
+# while delete pods it's works reverse order and delete pods in graceful way
+
+*This is the default behaviour of statefulset , we can overwrite that behaviour. By adding pod management policy field in defination file 
+
+#stateflset will allocate the names of the pods in index formate starting from 0 and visversa
+
+-----------------
+Headless service:
+-----------------
+
+#when ever we created a headless service, it's add the dns record for each pod by following
+---> "podname.headlessservicename.namespace.cluster-domain"
+	ex: mysql-0.mysql-h.default.cluster.local
+
+# create a headless service by using service defination file . But the difference between normal service and headless service is , we need have "clusterIp" option inside a defination file
+	
