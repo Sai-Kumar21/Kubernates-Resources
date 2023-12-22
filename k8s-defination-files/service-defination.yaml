@@ -1,0 +1,14 @@
+# node port having some valid range 30,000-32767 we can use.If we're not defined any port than service while open random available port in range
+
+apiVersion: v1
+kind: Service
+matadata:
+  name: nginx-service # name of the service
+spec:
+  type: NodePort
+  ports:
+    - targetport: 80 # port which is using by container
+      port: 80 # port which is using by service as a container port
+      nodeport: 30008  # port which is using by Host
+  selector:
+    app: myapp # label of the pod
