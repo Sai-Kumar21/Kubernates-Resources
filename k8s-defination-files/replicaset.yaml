@@ -1,0 +1,22 @@
+
+apiVersion: v1
+kind: ReplicaSet
+matadata:
+  name: myapp-replicaset # name of the object which we're creating
+  labels:
+    app: myapp # label must match with  pod label
+spec: 
+  template: # under template we have to add pod info 
+    metadata:
+      name: nginx-pod
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 2 # no.of replicas to create
+  selector:   
+    matchLabels:       
+      app: myapp # pod label
+      
